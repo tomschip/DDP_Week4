@@ -1,0 +1,42 @@
+DDP_Week4_Presentation
+========================================================
+author: Thomas Schipritt
+date: 8/27/2019
+autosize: true
+
+Predicting Cereal Ratings
+========================================================
+
+Using four different nutritional factors, the app predicts the rating of the cereal.  There are four sliders available to adjust the amounts of the nutrional factors.
+
+- Grams of Fat
+- Grams of Sugar
+- Grams of Protein
+- Grams of Fiber
+
+
+
+The prediction is based off a study of 80 breakfast cereals
+========================================================
+Data Source: https://www.kaggle.com/crawford/80-cereals/downloads/80-cereals.zip/2
+
+```{r}
+cereal_data <- read.csv("https://raw.githubusercontent.com/tomschip/DDP_Week4/master/cereal.csv",header=T, sep = ",")
+summary(cereal_data)
+```
+
+The adjusted r squared of the model is .87 and the p-value is less than .05
+========================================================
+The 4 factors explain 87% of the variation in rating and the null hypotheisis can be rejected because of the low p-value
+
+```{r}
+model <- lm(rating ~ fat + sugars + protein + fiber, data = cereal_data)
+summary(model)
+```
+
+The plot of the residuals is random - so the predictional model is appropriate
+========================================================
+
+```{r, echo=FALSE}
+plot(model$residuals)
+```
